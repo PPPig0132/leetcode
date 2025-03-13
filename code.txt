@@ -1,0 +1,23 @@
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        Cache=[]
+        for i in range(capacity):
+            temp=ListNode(-1)
+            Cache.append(temp)
+        return Cache
+
+    def get(self, key: int) -> int:
+        idnex=
+        
+
+    def put(self, key: int, value: int) -> None:
+        if(capacity<1):
+            remove
+        index=key%len(capacity)
+
+        while(Cache[index]!=-1):
+            x=Cache[index]
+            index=(index+1)%len(Cache)
+            x.next=Cache[index]
+
