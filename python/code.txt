@@ -1,0 +1,10 @@
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        x=root.val
+        l=self.maxPathSum(root.left)
+        r=self.maxPathSum(root.right)
+
+        ans=max(l,r,l+r+x)
+        return ans
