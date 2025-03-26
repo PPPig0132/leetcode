@@ -1,32 +1,19 @@
-class LRUCache {
+package Tree;
 
-    private capacity;
+public class MaxPathSum {
+    imt maxSum=Integer.MIN_VAULE;
 
-    public LRUCache(int capacity) {
-        this.capacity=capacity;
-    }
-    
-    public int get(int key) {
+    public int maxPathSum(TreeNode root) {
         
     }
-    
-    public void put(int key, int value) {
-        
-    }
-
-    public DListNode move_to_head(DListNode){
-        
+    public int maxGain(TreeNode root){
+        if (node==null){
+            return 0;
+        }
+        int l=math.max(maxGain(root.left),0);
+        int r=math.max(maxGain(root.right),0);
+        int price=root.val+l+r;
+        maxSum=math.max(price,maxSum);
+        return root.val+math.max(l,r);
     }
 }
-
-
-
-
-
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache obj = new LRUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */
