@@ -1,0 +1,20 @@
+public List<Integer> findAnagrams(String s, String p) {
+    List<Integer>res=new ArrayList<>();
+    Arrays.sort(p);
+    int pre=0;
+    for(;pre<s.length()-p.length()){
+        int end=pre+p.length();
+        String temp;
+        for(int j=pre;j<end;j++){
+            temp.put(s.charAt(j));
+        }
+        Arrays.sort(temp);
+        if(p==temp){
+            res.add(pre);
+        }
+        pre++;
+    }
+    return res;
+
+        
+    }
