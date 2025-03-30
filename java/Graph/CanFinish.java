@@ -1,5 +1,5 @@
 package Graph;
-
+import java.util.*;
 public class CanFinish {
     List<List<Integer>>edges;
     int indeg[];
@@ -10,7 +10,7 @@ public class CanFinish {
         }
         indeg=new int[numCourses];
         for(int[]info:prerequisites){
-            edges.get(info[1].add(info[0]));
+            edges.get(info[1]).add(info[0]);
             ++indeg[info[0]];
         }
         Queue<Integer> queue=new LinkedList<Integer>();
@@ -22,17 +22,15 @@ public class CanFinish {
         int visited=0;
         while(!queue.isEmpty()){
             ++visited;
-            int u=queue.pull();
+            int u=queue.poll();
             for(int v:edges.get(u)){
                 --indeg[v];
                 if(indeg[v]==0){
-                    queue.offer(V);
+                    queue.offer(v);
                 }
             }
 
         }
     return visited==numCourses;
-
     }
-    
 }
