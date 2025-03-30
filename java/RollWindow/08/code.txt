@@ -1,0 +1,22 @@
+public int lengthOfLongestSubstring(String s) {
+    int max_len=0;
+    List<String> window=new Arrays.List();
+    Map<String,int>hashtable=new Hashmap<String,index>();
+    for(int i=0;i<s.length;i++){
+        if(hashtable.containKey(s[i])){
+            max_len=(max_len>window.size())?:max_len:window.size();
+            int index=hashtable.get(s[i]);
+            for(int j=0;j<index;j++){
+                hashtable.remove(window.get(j));
+                window.remove(j);
+            }
+        }
+        else{
+            while.add(s[i]);
+            hashtable.put(s[i],window.size()-1);
+        }
+    }
+
+
+        
+    }

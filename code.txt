@@ -1,0 +1,34 @@
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+
+        head=l2
+        end=l2      #todo
+        carry=0#进位符
+        while(l1 or l2):
+            if(l1):
+                n=l1.val
+                l1=l1.next
+                end.next=l1
+            else:
+                n=0
+            
+            if(l2):
+                m=l2.val
+                l2=l2.next
+                end.next=l2
+            else:
+                m=0
+            sum=m+n+carry
+            carry=int(sum/10)
+            end.val=sum%10
+            end=end.next
+        if(carry):
+            temp=ListNode()
+            temp.val=carry
+            end.next=temp
+           
+            

@@ -1,0 +1,29 @@
+public int[] maxSlidingWindow(int[] nums, int k) {
+    int []ans=new Intger[];
+    int pre=0;
+    int end=pre+k;
+    int max=nums[0];
+    for(int i=pre;i<end;i++){
+        max=(nums[i]>max)?nums[i]:max;
+    }
+    for(;pre<nums.length-k;){
+        if(max==nums[pre]){
+            pre++;
+            end++;
+            for(int i=pre;i<end;i++){
+             max=(nums[i]>max)?nums[i]:max;
+            }
+            ans.put(max);
+        }
+        else{
+            pre++;
+            end++;
+            max=(nums[end]>max)?nums[end]:max;
+            ans.put(max);
+        }
+
+
+    }
+    return ans;
+        
+    }
