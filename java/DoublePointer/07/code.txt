@@ -1,0 +1,35 @@
+public int trap(int[] height) {
+        int sum_rain=0;
+        int pre=0;
+        int end;
+       
+        for(;pre<height.length-1;){
+            end=pre+1;
+            int sum1=0;
+            int sum2=0;//用于没有V1.0找到的的情况
+            int max=0; int max_index;//记录除了左端外的最大值
+            while(end<height.length&&height[pre]>height[end]){
+            sum1+=height[end];
+            
+            if(height[end]>max){
+                max_index=end;
+                }   
+            end++;
+            }
+            if(end==height.length){//没有找到左低右高的最大容器
+                for(int j=pre+1;j<max_index;j++){
+                    sum2+=height[j];
+                }
+                sum_rain+=((end-pre-1)*h-sum2);
+                pre=max_index;
+            }
+            else{//找到符合条件的右端
+            int h= (height[pre]>height[end])?height[end]:height[pre];
+            sum_rain+=((end-pre-1)*h-sum1);
+            pre=end;
+            }
+            
+        }
+        return sum_rain;
+            
+        }
