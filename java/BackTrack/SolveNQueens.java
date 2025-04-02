@@ -10,6 +10,16 @@ import java.util.*;
 */
 
 public class SolveNQueens {
+    public static void main(String args[]){
+        int n=4;
+        SolveNQueens obj=new SolveNQueens();
+        List<List<String>> ans=obj.solveNQueens(n);
+        
+        for(List<String> list:ans){
+            System.out.println(list);
+        }
+        System.out.println(ans.size());
+    }
      public List<List<String>> solveNQueens(int n) {
         List<List<String>> res=new ArrayList<List<String>>();
         char[][] pos= new char[n][n];
@@ -18,33 +28,46 @@ public class SolveNQueens {
                 pos[i][j]='.';
             }
         }
+        backtrack(res,pos,0,0);
+        return res;
     }
 
-    public void backtrack(List<List<String>> res,List<String> temp,char[][] pos;int count,int r){
-        int n=pos.length();
+    public void backtrack(List<List<String>> res,char[][] pos,int count,int r){
+        int n=pos.length;
         if(r==n){
-        if(count==n){
-            for(char[] str1:pos){
-                String temp=new String(str1);
-                res.add(new ArrayList<String>(temp));
-                return;
-                }
+            if(count==n){
+                List<String> temp=new ArrayList<String>();
+                    for(char[] str1:pos){
+                    temp.add(new String(str1));
+                    }
+                    res.add(new ArrayList<String>(temp));
+                    return;
             }
+
             return;
         }
-        for(int i=r; i<n;i++){
-            for(int j=0;i<n;j++){
-                if(!check(pos,i,j)){
-                    pos[i][j]='Q';
-                    backtrack(res,temp,pos,count+1,r+1);
-                    pos[i][j]='.';
+        // 遍历每一列，r已经确定了行数，不需要再增加一个for循环，只遍历列就行
+            for(int j=0;j<n;j++){
+                if(!check(pos,r,j)){
+                    pos[r][j]='Q';
+                    backtrack(res,pos,count+1,r+1);
+                    pos[r][j]='.';
                 }
             }
-        }
+
+            // for(int i=r; i<n;i++){
+            //     for(int j=0;j<n;j++){
+            //         if(!check(pos,i,j)){
+            //             pos[i][j]='Q';
+            //             count++;
+            //             backtrack(res,pos,count,r+1);
+            //             count--;
+            //             pos[i][j]='.';
+            //         }
+            //     }}
     }
-    boolean check(char[][]board; int i; int j){
+    boolean check(char[][]board, int i, int j){
         int n = board.length;
-        // 检查同一行
         for (int k = 0; k < n; k++) {
             if (k != j && board[i][k] == 'Q') {
                 return true;
