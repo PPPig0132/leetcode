@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class FindMedianSortedArrays {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
@@ -32,12 +34,31 @@ public class FindMedianSortedArrays {
 
         throw new IllegalArgumentException("Input arrays are not sorted or not valid.");
     }
+    public boolean  isNumber(char c){
+        return (c-'0')<9?true:false;
+    }
 
     public static void main(String[] args) {
         int[] nums1 = {1, 3};
         int[] nums2 = {2,5};
 
         double median = findMedianSortedArrays(nums1, nums2);
-        System.out.println("Median: " + median); // 输出 2.0
+        Stack <int[]> stack = new Stack<>();
+
+       int []x= new int []{1,2};
+       stack.push(new int[]{1, 2});
+       x[1]=3;
+       stack.push(x);
+       while(!stack.isEmpty()){
+        int [] s1=stack.pop();
+        for(int i=0;i<s1.length;i++){
+            System.out.print(s1[i]+" ");
+        }
+       
+       }
+
+     
+        FindMedianSortedArrays obj=new FindMedianSortedArrays();
+        System.out.println(obj.isNumber(']')); // 输出 true
     }
 }

@@ -13,7 +13,7 @@ idea:
 将等于最小值的位置置零
 对于每个子数组分别计算
 直到去除所有的元素
-[l,r,h] 将（l,r）中间为h的值置为0
+[l,r,h] 将（l,r）中间根据当前的最小值进行分割
 */
 public class LargestRectangleArea {
     public int largestRectangleArea(int[] heights) {
@@ -26,7 +26,7 @@ public class LargestRectangleArea {
         }
         stack.push(new int[]{0,heights.length,h});
         int ans=0;
-        while(!stack.isEmpty){
+        while(!stack.isEmpty()){
             int []top=stack.pop();
             h=top[2];
             int l=top[0],r=top[1];
@@ -35,14 +35,18 @@ public class LargestRectangleArea {
             ans=Math.max(area,ans);
             //分区间 重新入栈
             h=Integer.MAX_VALUE;
-            for(int i=l,i<r;i++){
-                if(heights[i]==h){
-                    stack.push(new int[]{l,i,h});
-                    l=i;
-                    h=Integer.MAX_VALUE;
+            for(int i=l;i<=r;i++){
+                if(i==r||heights[i]==top[2]){
+                    
+                    if(i!=l){
+                        stack.push(new int[]{l,i,h});
+                       
+                        h=Integer.MAX_VALUE;
+                     }
+                     l=i+1;
                 }
                 else{
-                    if(heights[i]<=h&&heights!=top[2]){
+                    if(heights[i]<=h&&heights[i]!=top[2]){
                         h=heights[i];
                     }
                 }
@@ -53,5 +57,12 @@ public class LargestRectangleArea {
         }
         return ans;
         
+    }
+    public static void main(String args[]){
+        LargestRectangleArea obj=new LargestRectangleArea();
+        int [] heights={2,1,5,6,2,3};
+        int []h1={2,4};
+        int ans=obj.largestRectangleArea(h1);
+        System.out.println(ans);
     }
 }
