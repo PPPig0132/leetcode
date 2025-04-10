@@ -47,7 +47,8 @@ public class FindMedianSortedArrays {
                 left = i + 1;
             }
             }
-            throw new IllegalArgumentException("Input arrays are not sorted or not valid.");
+            return 0.0; // 如果输入数组不合法，返回0.0
+            //throw new IllegalArgumentException("Input arrays are not sorted or not valid.");
     }
     
 }
