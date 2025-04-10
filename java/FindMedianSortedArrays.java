@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class FindMedianSortedArrays {
@@ -45,17 +47,26 @@ public class FindMedianSortedArrays {
         double median = findMedianSortedArrays(nums1, nums2);
         Stack <int[]> stack = new Stack<>();
 
-       int []x= new int []{1,2};
-       stack.push(new int[]{1, 2});
-       x[1]=3;
-       stack.push(x);
-       while(!stack.isEmpty()){
-        int [] s1=stack.pop();
-        for(int i=0;i<s1.length;i++){
-            System.out.print(s1[i]+" ");
-        }
+    //    int []x= new int []{1,2};
+    //    stack.push(new int[]{1, 2});
+    //    x[1]=3;
+    //    stack.push(x);
+    //    while(!stack.isEmpty()){
+    //     int [] s1=stack.pop();
+    //     for(int i=0;i<s1.length;i++){
+    //         System.out.print(s1[i]+" ");
+    //     }
        
-       }
+    //    }
+       int []nums={1,2,3,4,4,5,6,6,7};
+       Map<Integer,Integer>freq=new HashMap<Integer,Integer>();
+        for(int i=0;i<nums.length;++i){
+            freq.put(nums[i],freq.getOrDefault(nums[i],0)+1);
+        }
+        for(Map.Entry<Integer,Integer>entry:freq.entrySet()){
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+        System.out.println(freq.size()); // 输出 2.0
 
      
         FindMedianSortedArrays obj=new FindMedianSortedArrays();

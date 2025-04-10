@@ -19,7 +19,7 @@ public class TopKFrequent {
             key[index++]=entry.getKey();
         }
         buildMinHeap(key,k,freq);
-        for(int i=k;i<key.length;k++){
+        for(int i=k;i<key.length;i++){
             if(freq.get(key[i])>freq.get(key[0])){
                 swap(key,0,i);
                 minMize(key,0,k,freq);
@@ -32,7 +32,7 @@ public class TopKFrequent {
 
         
     }
-    public void buildMinHeap(int []a;int heapSize,Map<Integer,Integer>map){
+    public void buildMinHeap(int []a,int heapSize,Map<Integer,Integer>map){
         for(int i=heapSize/2-1;i>=0;i--){
             minMize(a,i,heapSize,map);
         }
@@ -40,10 +40,10 @@ public class TopKFrequent {
     }
     public void minMize(int[]a,int root,int heapSize,Map<Integer,Integer>map){
         int l=root*2+1,r=root*2+2,largest=root;
-        if(l<heapSize&& map.get[a[l]]>map.get(a[largest])){
+        if(l<heapSize&& map.get(a[l])<map.get(a[largest])){
             largest=l;
         }
-        if(r<heapSize&& map.get[a[r]]>map.get(a[largest])){
+        if(r<heapSize&& map.get(a[r])<map.get(a[largest])){
             largest=r;
         }
         if(largest!=root){
@@ -57,6 +57,16 @@ public class TopKFrequent {
         int temp=a[l];
         a[l]=a[r];
         a[r]=temp;
+    }
+
+    public static void main(String args[]){
+        int []nums={1,1,1,2,2,3,3,3,3};
+        int k=2;
+        TopKFrequent obj=new TopKFrequent();
+        int []ans=obj.topKFrequent(nums,k);
+        for(int i=0;i<ans.length;i++){
+            System.out.print(ans[i]+" ");
+        }
     }
     
 }
