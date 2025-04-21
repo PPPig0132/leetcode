@@ -1,0 +1,57 @@
+import java.util.Arrays;
+
+public class Test {
+        public int longestValidParentheses(String s) {
+            if(s.length()==0||s.length()==1 ){
+                return 0;
+            }
+            int n=s.length(),count=0;
+            int []ans=new int[n+1];
+            ans[0]=0;
+    
+            //数组实现栈
+    
+            int stack[]=new int[n];
+            int top=-1;//栈顶指针
+    
+    
+            for(int i=1;i<=n;++i){
+                char c=s.charAt(i-1);
+                if(c=='('){
+                    if(count<=0){//前一段可以丢弃了,清空栈
+                        top=-1;
+                        stack[++top]=i;
+                       count=1;
+                    }
+                    else{
+                        count++;
+                        stack[++top]=i;
+                    }
+                }
+               else{
+                count--;
+                if(top>-1){
+                   //栈不空栈顶元素出栈、计算长度
+                   int x=stack[top--]-1;
+                   ans[i]=i-x+ans[x];
+                }
+    
+                // else{
+                //     ans[i]=0;
+                // }
+            }
+        }
+            int max=-1;
+            for(int i=0;i<=n;++i){
+                max=Math.max(ans[i],max);
+            }
+            return max;
+        }
+    
+    public static void main(String[] args) {
+        // Test solution = new Test();
+        String s="abcdefg";
+        char c1='a',c2='e';
+        System.out.println(s.contains("ae")); // Output: 4 (The longest valid parentheses substring is "()()".)
+    }
+}
