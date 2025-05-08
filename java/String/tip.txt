@@ -1,0 +1,2 @@
+时间开销：
+连接字符串时，StringBuilder.append()的时间开销远小于+操作

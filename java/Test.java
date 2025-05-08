@@ -50,8 +50,8 @@ public class Test {
     
     public static void main(String[] args) {
         // Test solution = new Test();
-        String s="abcdefg";
-        char c1='a',c2='e';
-        System.out.println(s.contains("ae")); // Output: 4 (The longest valid parentheses substring is "()()".)
+        String s="Mmsdnajd",s1="md";
+
+        System.out.println(s.contains(s1)); // Output: 4 (The longest valid parentheses substring is "()()".)
     }
 }
