@@ -17,7 +17,8 @@ public class FullJustify {
             int count=maxWidth+1-len;
             if(end==n){
                 for(int i=start;i<end-1;++i){
-                    item.append(words[i]+" ");
+                    item.append(words[i]);
+                    item.append(" ");
                 }
                 item.append(words[end-1]);
                 for(int i=0;i<count;++i){
@@ -32,11 +33,11 @@ public class FullJustify {
                 while(index<number){
                     while(index<remain){
                         item.append(words[start+index]);
-                        item.append(" ".repeat(avg+1));
+                        item.append(repeat(avg+1));
                         index++;
                     }
                     item.append(words[start+index]);
-                        item.append(" ".repeat(avg));
+                        item.append(repeat(avg));
                         index++;
                 }
                 item.append(words[end-1]);
@@ -50,14 +51,17 @@ public class FullJustify {
                 }
                  ans.add(item.toString());
             }
-            
-           
-           
             start=end;
-
         }
         return ans;
         
+    }
+    public String repeat(int n){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(" ");
+        }
+        return sb.toString();
     }
         
     public static void main(String[] args) {

@@ -35,21 +35,40 @@ public class Jump {
         
     // }
     public int jump(int[] nums) {
+        // if(nums.length==1){
+        //     return 0;
+        // }
+        // int count=0;
+        // int terminal=0,end=nums[terminal]+terminal,max=end;
+        // while(end<nums.length-1){
+        //     for(int i=terminal+1;i<=end;++i){
+        //         if(nums[i]+i>max){
+        //             max=nums[i]+i;
+        //             terminal=i;
+        //         }
+        //     }
+        //     end=max;
+        //     count++;
+        //     max=0;
+        // }
+        // count++;//最后一跳
+        // return count;
         if(nums.length==1){
             return 0;
         }
         int count=0;
-        int terminal=0,end=nums[terminal]+terminal,max=end;
-        while(end<nums.length-1){
-            for(int i=terminal+1;i<=end;++i){
-                if(nums[i]+i>max){
-                    max=nums[i]+i;
-                    terminal=i;
-                }
+        int start=0,end=nums[start]+start,max=end,n=nums.length;
+        while(start<=end && end<n-1){
+            if(start+nums[start]>max){
+                max=nums[start]+start;
             }
-            end=max;
-            count++;
-            max=0;
+           
+            if(start==end){
+                count++;
+                start=end;
+                end=max;
+            }
+            start++;
         }
         count++;//最后一跳
         return count;

@@ -11,16 +11,11 @@ public class LengthOfLastWord {
         if(s.length()==0){
             return 0;
         }
-        int ans=0;
-        s=s.trim();
-        int index=s.length()-1;
-        while(s.charAt(index)!=' '){
-            if(index==0){//整个字符串中只有一个单词的情况
-                return ans+1;
-             }
+        String s1=s.trim();
+        int a=s1.length()-1,ans=0;
+        while(a>=0 &&s1.charAt(a)!=' '){
+            a--;
             ans++;
-            index--;
-          
         }
         return ans;
         
