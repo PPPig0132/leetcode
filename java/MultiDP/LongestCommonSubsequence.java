@@ -9,6 +9,8 @@ p(i,j)表示长字串中是否存在由s2[i]和s2[j]组成的子串
 
 s[1,2,3]=s[s1,2]&&s[2,3]
 
+双指针中的判断子串问题
+
  */
 
 public class LongestCommonSubsequence {

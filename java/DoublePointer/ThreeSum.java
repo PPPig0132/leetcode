@@ -10,7 +10,10 @@ public class ThreeSum {
         int l=0,r=nums.length-1;
         quickSort(nums,l,r);
         for(int i=0;i<=r;++i){
-            int target=0-nums[i],start=i,end=r;
+            if(i!=0&&nums[i]==nums[i-1]){
+                continue;
+            }
+            int target=0-nums[i],start=i+1,end=r;
             while(start<end){
                 int sum=nums[start]+nums[end];
                 if(sum==target){
@@ -19,6 +22,12 @@ public class ThreeSum {
                     item.add(nums[start]);
                     item.add(nums[end]);
                     ans.add(item);
+                    while(start<end&&nums[start]==nums[start+1]){
+                        start++;
+                    }
+                    while(start<end&&nums[end]==nums[end-1]){
+                        end--;
+                    }
                     start++;
                     end--;
                 }
@@ -61,8 +70,9 @@ public class ThreeSum {
     public static void main(String[] args) {
         ThreeSum ts = new ThreeSum();
         
-        int[] nums = {-1, 0, 1, 2, -1, -4};
-        ts.quickSort(nums, 0, nums.length - 1);
+        int[] nums = {2,-3,0,-2,-5,-5,-4,1,2,-2,2,0,2,-4,5,5,-10};//{-10,-5,-5,-4,-4,0,1,2,2,2,2,5,5}
+        
+        // ts.quickSort(nums, 0, nums.length - 1);
         List<List<Integer>> result = ts.threeSum(nums);
         System.out.println(result);
     }
