@@ -51,7 +51,19 @@ public class Test {
     public static void main(String[] args) {
         // Test solution = new Test();
         String s="Mmsdnajd",s1="md";
-
+        int[][]in={{0,1},{2,4},{1,5},{4,5}};
+        Arrays.sort(in,(a,b)->{
+            if(a[1]!=b[1]){
+                return a[1]-b[1];
+            }
+            return a[0]-b[0];
+        });
+        for( int []item:in){
+            for(int i=0;i<item.length;++i){
+                System.out.print(item[i]+" ");
+            }
+            System.out.println();
+        }
         System.out.println(s.contains(s1)); // Output: 4 (The longest valid parentheses substring is "()()".)
     }
 }
