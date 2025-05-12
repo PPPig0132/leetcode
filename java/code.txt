@@ -1,70 +1,87 @@
-package DoublePointer;
-/*
-请你返回所有和为 0 且不重复的三元组。
-*/
-import java.util.*;
+package RollWindow;
 
-public class ThreeSum {
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> ans =new ArrayList<List<Integer>>();
-        int l=0,r=nums.length-1;
-        quickSort(nums,l,r);
-        for(int i=0;i<=r;++i){
-            int target=0-nums[i],start=i,end=r;
-            while(start<end){
-                int sum=nums[start]+nums[end];
-                if(sum==target){
-                    List<Integer>item=new ArrayList<>();
-                    item.add(nums[i]);
-                    item.add(nums[start]);
-                    item.add(nums[end]);
-                    ans.add(item);
-                    start++;
-                    end--;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FindSubstring {
+    public List<Integer> findSubstring(String s, String[] words) {
+        int m=s.length(),n=words.length,x=words[0].length();
+        List<Integer>ans=new ArrayList<Integer>();
+        Arrays.sort(words);
+        if(m<n*x){
+            return ans;
+        }
+        //char s1[]=s.toCharArray();
+        int start=0,end=n*x-1;
+        while(end<m){
+            String []temp=new String[n];
+            for(int i=0;i<=n;){
+                temp[i]=s.substring(n*i,n*(i+1));
+            }
+            Arrays.sort(temp);
+            for(int i=0;i<n;++i){
+                if(!temp[i].equals(words[i])){
+                    break;
                 }
-                else if(sum<target){
-                    start++;
-                }
-                else{
-                    end--;
+                if(i==n-1){
+                    ans.add(start);
                 }
             }
-
+            start++;
+            end++;
         }
         return ans;
-        
     }
-    public void quickSort(int []nums,int l,int r){
-        if(l<r){
-            int pivot=parition(nums,l,r);
-            quickSort(nums,l,pivot-1);
-            quickSort(nums,pivot+1,r);
-        }
-    }
-    public int parition(int []nums, int l, int r){
-        int pivot=nums[r];
-        int index=l;
-        for(int j=l;j<r;++j){
-            if(nums[j]<pivot){
-                swap(nums,index,j);
-                index++;
+
+
+
+    public boolean check(char []s,int start, int end, String []words){
+        int m=words.length,n=words[0].length();
+         int count=m*n,index=0;
+         int mark[]=new int[count];
+         while(count>0 && index<m){
+            char c1[]=words[index].toCharArray();
+            index++;
+            for(int i=start;i<end+1;){
+                if(match(s,i,c1) && mark[i-start+n-1]==0){
+                    count-=n;
+                    for(int j=0;j<n;++j){
+                        mark[i-start+j]++;
+                    }
+                    break;
+                }
+                else{
+                    i+=n;
+                }
+                if(i==end+1 && mark[m*n-1]==0){
+                    return false;
+                }
             }
-        }
-        swap(nums, index, r);
-        return index;
+
+         }
+         if(count>0){
+            return false;
+         }
+         return true;
     }
-    public void swap(int []nums, int i,int j){
-        int temp=nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
+     public boolean match(char []s,int start, char []words){
+        for(int i=0;i<words.length;++i){
+            if(s[i+start]!=words[i])
+            {
+                return false;
+            }
+            
+        }
+        return true;
     }
     public static void main(String[] args) {
-        ThreeSum ts = new ThreeSum();
-        
-        int[] nums = {-1, 0, 1, 2, -1, -4};
-        ts.quickSort(nums, 0, nums.length - 1);
-        List<List<Integer>> result = ts.threeSum(nums);
-        System.out.println(result);
+        FindSubstring findSubstring=new FindSubstring();
+        String s="barfoothefoobarman";
+        String []words={"foo","bar"};
+        List<Integer>ans=findSubstring.findSubstring(s, words);
+        for(int i=0;i<ans.size();++i){
+            System.out.print(ans.get(i)+" ");
+        }
+        // System.out.println(findSubstring.findSubstring(s, words));
     }
-    
 }
