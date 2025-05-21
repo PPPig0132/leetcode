@@ -58,12 +58,20 @@ public class Test {
             }
             return a[0]-b[0];
         });
-        for( int []item:in){
-            for(int i=0;i<item.length;++i){
-                System.out.print(item[i]+" ");
-            }
-            System.out.println();
+        // for( int []item:in){
+        //     for(int i=0;i<item.length;++i){
+        //         System.out.print(item[i]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        int ans[]=new int[]{1,3};
+        String c="/home//foo/";
+        String []c1=c.split("/");
+        for(int i=0;i<c1.length;++i){
+            System.out.print(c1[i]+" ");
         }
-        System.out.println(s.contains(s1)); // Output: 4 (The longest valid parentheses substring is "()()".)
+        // StringBuilder sb=new StringBuilder();
+        // sb.append(1);
+        // System.out.println(c.split(c)); // Output: 4 (The longest valid parentheses substring is "()()".)
     }
 }

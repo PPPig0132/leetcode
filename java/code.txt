@@ -1,87 +1,101 @@
-package RollWindow;
+package Stack;
 
-import java.util.ArrayList;
-import java.util.List;
+/*
+算术优先级： ()  +-   只有加减没有乘除
+算术栈和符号栈
+遇到乘除，先计算出结果
+遇到加减和前括号，先进栈
+遇到后括号，符号栈出栈至前括号完
+*/
 
-public class FindSubstring {
-    public List<Integer> findSubstring(String s, String[] words) {
-        int m=s.length(),n=words.length,x=words[0].length();
-        List<Integer>ans=new ArrayList<Integer>();
-        Arrays.sort(words);
-        if(m<n*x){
-            return ans;
-        }
-        //char s1[]=s.toCharArray();
-        int start=0,end=n*x-1;
-        while(end<m){
-            String []temp=new String[n];
-            for(int i=0;i<=n;){
-                temp[i]=s.substring(n*i,n*(i+1));
-            }
-            Arrays.sort(temp);
-            for(int i=0;i<n;++i){
-                if(!temp[i].equals(words[i])){
+public class Calculater {
+    public int calculate(String s) {
+        s=s.replaceAll(" ","");
+        char s1[]=s.toCharArray();
+        int []stack=new int[s1.length];
+        char operator[]=new char[s1.length];
+        int pos1=new int[s1.length];//记录每个括号对应的数起始的位置
+        int pos2=new int[s1.length];//记录每个括号对应的符号起始的位置
+        int top1=-1,top2=-1,sum=0,count=-1,a;//count用于记录括号的数量
+        for(int i=0;i<s1.length;++i){
+            switch(s1[i]){
+                case '+':
+                    operator[++top2]=s1[i];
                     break;
-                }
-                if(i==n-1){
-                    ans.add(start);
-                }
+                case '-':
+                    operator[++top2]=s1[i];
+                    if(i==0 || s1[i-1]=='('){
+                        stack[++top1]=0;
+                    }
+                    //stack[++top1]=0;
+                    break;
+                case '(':
+                    pos1[++count]=top1+1;
+                    pos2[count]=top2+1;
+                    break;
+                case ')':
+                    for(int i=pos2[count];i<=top2;++i){
+                        switch(operator[i]){
+                            case '+':
+                                stack[pos1[count]+i]+=stack[pos1[count]+i+1];
+                                break;
+                            case '-':
+                                stack[pos1[count]+i+1]=stack[pos1[count]+i]-stack[pos1[count]+i+1];
+                                break;
+                        }
+
+                    }
+                    stack[pos1[count]]=stack[top1];
+                    top1=pos1[count];
+                    top2=pos2[count--];
+                    top2--;
+                    break;
+                default:
+                    if(s1[i]=='0'){
+                        stack[++top1]=0;
+                        break;
+                    }
+                    sum=s1[i]-'0';
+                    i++;
+                    while(i<s1.length&&s1[i]-'0'>-1&&s1[i]-'0'<10){
+                        sum=sum*10+(s1[i]-'0');
+                        i++;
+                    }
+                    i--;
+                    stack[++top1]=sum;
+                    sum=0;
             }
-            start++;
-            end++;
+
         }
-        return ans;
-    }
-
-
-
-    public boolean check(char []s,int start, int end, String []words){
-        int m=words.length,n=words[0].length();
-         int count=m*n,index=0;
-         int mark[]=new int[count];
-         while(count>0 && index<m){
-            char c1[]=words[index].toCharArray();
-            index++;
-            for(int i=start;i<end+1;){
-                if(match(s,i,c1) && mark[i-start+n-1]==0){
-                    count-=n;
-                    for(int j=0;j<n;++j){
-                        mark[i-start+j]++;
+        int ans=stack[0],index=0;
+        for(int i=0;i<=top2;++i){
+            switch(operator[i]){
+                case '+':
+                    ans+=stack[++index];
+                    break;
+                case '-':
+                    if(i==0 && top2==top1){
+                        ans=0-ans;
+                    }
+                    else{
+                        ans-=stack[++index];
                     }
                     break;
-                }
-                else{
-                    i+=n;
-                }
-                if(i==end+1 && mark[m*n-1]==0){
-                    return false;
-                }
             }
-
-         }
-         if(count>0){
-            return false;
-         }
-         return true;
-    }
-     public boolean match(char []s,int start, char []words){
-        for(int i=0;i<words.length;++i){
-            if(s[i+start]!=words[i])
-            {
-                return false;
-            }
-            
         }
-        return true;
+        // while(top1!=0){
+        //     a=stack[top1--];
+        //     stack[top1]+=a;
+        // }
+        return ans;
     }
     public static void main(String[] args) {
-        FindSubstring findSubstring=new FindSubstring();
-        String s="barfoothefoobarman";
-        String []words={"foo","bar"};
-        List<Integer>ans=findSubstring.findSubstring(s, words);
-        for(int i=0;i<ans.size();++i){
-            System.out.print(ans.get(i)+" ");
-        }
-        // System.out.println(findSubstring.findSubstring(s, words));
+        Calculater c=new Calculater();
+        String s="1-(    -2)";
+        // // System.out.println(c.calculate(s));
+        // s="- (3 + (4 + 5))";
+        // System.out.println(c.calculate(s));
+        s="2-4-(8+2-6+(8+4-(1)+8-10))";
+        System.out.println(c.calculate(s));
     }
 }
