@@ -1,0 +1,7 @@
+栈和队列
+
+栈： Deque<>stack =new  LinkedList<>();  进栈 push() 出栈 pop()
+队列： Quque<>quque =new  LinkedList<>(); 进栈 offer() 出栈 poll
+
+列表（List）: add()
+HashSet: put 

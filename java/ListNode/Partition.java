@@ -1,5 +1,4 @@
 import ListNode.ListNode;
-import java.util.*;
 public class Partition {
     public ListNode partition(ListNode head, int x) {
         if(x>100 || x<-100){
@@ -18,6 +17,7 @@ public class Partition {
                 pre1.next=end.next;
                 end.next=pre.next;
                 pre.next=end;
+                pre=pre.next;//插入不应该时头插法，因此pre的位置要后移
                 end=pre1.next;
                 continue;
             }
@@ -25,5 +25,13 @@ public class Partition {
             end=end.next;
         }
         return new_head.next;
+    }
+    public static void main(String[] args) {
+        int values[] = {1,4,3,0,2,5,2};
+        ListNode head = ListNode.generateLinkList(values);
+        ListNode.printList(head);
+        Partition partition = new Partition();
+        ListNode result = partition.partition(head, 3);
+        ListNode.printList(result);
     }
 }
