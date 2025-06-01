@@ -1,7 +1,7 @@
 package Tree;
 import java.util.*;
 
-
+/*二叉树展开为链表 */
 public class Flatten {
 
     public void flatten(TreeNode root) {
