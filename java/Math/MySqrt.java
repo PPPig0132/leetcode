@@ -6,31 +6,37 @@ package Math;
 
 逐步调大步长
 0 1 2 4 8 16 ....
+
+二分查找
 */
 
 public class MySqrt {
-    public int mySqrt(int x) {
-        Long  start=0L,step=1L;
+     public static int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
 
-        while((start+step)*(start+step)<=x){
-            step*=2;
-        }
-       
-        start=start+step/2;
-        step/=4;
-        while(step>0){
-            while((start+step)*(start+step)<=x){
-                start+=step;
-                step/=2;
+        long left = 1;
+        long right = x;
+
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+            long square = mid * mid;
+
+            if (square == x) {
+                return (int) mid;
+            } else if (square < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
-            step/=2;
         }
-        return start.intValue();
-        
+
+        return (int) right;
     }
     public static void main(String[] args) {
         MySqrt mySqrt = new MySqrt();
-        int x = 4;
+        int x = 9801;
         int result = mySqrt.mySqrt(x);
         System.out.println(result); // Output: 3 (The square root of 15 is approximately 3.872, so the integer part is 3.)
     }
