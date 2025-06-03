@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Math;
 /*
 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
@@ -37,3 +38,5 @@ public class MySqrt {
     
 }
 
+=======
+>>>>>>> parent of 3893e01 (Merge pull request #17 from PPPig0132/asus)
