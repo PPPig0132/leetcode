@@ -1,39 +1,23 @@
-package Math;
+package BitOperation;
 /*
-给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
+给你一个整数数组 nums ，除某个元素仅出现 一次 外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素。
 
-由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。
-
-逐步调大步长
-0 1 2 4 8 16 ....
+你必须设计并实现线性时间复杂度的算法且使用常数级空间来解决此问
 */
 
-public class MySqrt {
-    public int mySqrt(int x) {
-        Long  start=0L,step=1L;
-
-        while((start+step)*(start+step)<=x){
-            step*=2;
+public class SingleNumberII {
+    public int singleNumber(int[] nums) {
+        int sum=0,sum1=0,res=nums[0];
+        for(int num:nums){
+            sum+=num;
         }
-       
-        start=start+step/2;
-        step/=4;
-        while(step>0){
-            while((start+step)*(start+step)<=x){
-                start+=step;
-                step/=2;
+        for(int i=1;i<nums.length;++i){
+            if(res==(res&nums[i])){
+                sum1+=(nums*3);
             }
-            step/=2;
+            res&=nums[i];
         }
-        return start.intValue();
-        
-    }
-    public static void main(String[] args) {
-        MySqrt mySqrt = new MySqrt();
-        int x = 4;
-        int result = mySqrt.mySqrt(x);
-        System.out.println(result); // Output: 3 (The square root of 15 is approximately 3.872, so the integer part is 3.)
+        return sum-sum1;
     }
     
 }
-
