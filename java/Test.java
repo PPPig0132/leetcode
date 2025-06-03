@@ -9,14 +9,10 @@ public class Test {
         // for(int i=0;i<c1.length;++i){
         //     System.out.print(c1[i]+" ");
         // }
-        Set<Integer> set = new HashSet<>();
-        set.add(1);
-        set.add(1);
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(null);
+       int x=5,y=7;
         // int a=queue.poll();
-        int b=queue.peek();
+        // int b=queue.peek();
         
-        System.out.println(queue.isEmpty()); // Output: 4 (The longest valid parentheses substring is "()()".)
+        System.out.println(x&y); // Output: 4 (The longest valid parentheses substring is "()()".)
     }
 }
