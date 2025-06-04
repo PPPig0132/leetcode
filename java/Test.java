@@ -9,6 +9,7 @@ public class Test {
         // for(int i=0;i<c1.length;++i){
         //     System.out.print(c1[i]+" ");
         // }
+
        int x=15;
        Long res=289398L*289398L;
        for(int i=1;i<=x;++i){
