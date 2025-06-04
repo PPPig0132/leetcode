@@ -1,42 +1,16 @@
-<<<<<<< HEAD
 package Math;
 /*
-给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
+给你一个数组 points ，其中 points[i] = [xi, yi] 表示 X-Y 平面上的一个点。求最多有多少个点在同一条直线上。
 
-由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。
+idea:
+都是整数，y=kx+b k应该数整数 
 
-逐步调大步长
-0 1 2 4 8 16 ....
+点在直线上，点不在直线上
+点在直线上 
 */
 
-public class MySqrt {
-    public int mySqrt(int x) {
-        Long  start=0L,step=1L;
-
-        while((start+step)*(start+step)<=x){
-            step*=2;
-        }
-       
-        start=start+step/2;
-        step/=4;
-        while(step>0){
-            while((start+step)*(start+step)<=x){
-                start+=step;
-                step/=2;
-            }
-            step/=2;
-        }
-        return start.intValue();
+public class MaxPoints {
+    public int maxPoints(int[][] points) {
         
     }
-    public static void main(String[] args) {
-        MySqrt mySqrt = new MySqrt();
-        int x = 4;
-        int result = mySqrt.mySqrt(x);
-        System.out.println(result); // Output: 3 (The square root of 15 is approximately 3.872, so the integer part is 3.)
-    }
-    
 }
-
-=======
->>>>>>> parent of 3893e01 (Merge pull request #17 from PPPig0132/asus)
