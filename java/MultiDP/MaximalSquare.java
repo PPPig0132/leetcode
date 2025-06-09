@@ -8,34 +8,29 @@ dp[i][j]=min(dp[i−1][j],dp[i][j−1],dp[i−1][j−1])+1
 */
 public class MaximalSquare {
     public int maximalSquare(char[][] matrix) {
-        int m=matrix.length,n=matrix[0].length;
-        int h[]=new int[n+1];
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
 
-        dp(matrix,h,0);
-        return h[0];
-        
-    }
-    public void dp(char[][] matrix, int []h,int index){
-        if(index==matrix.length) return;
-        for(int i=0;i<matrix[0].length;++i){
-            if(matrix[index][i]=='1'){
-                if(index==0&& i==0){
-                    h[i+1]=1;
-                    h[0]=1;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        int maxSide = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(dp[i - 1][j], Math.min(dp[i][j - 1], dp[i - 1][j - 1])) + 1;
+                    }
+                    maxSide = Math.max(maxSide, dp[i][j]);
                 }
-                else{
-                    
-                }
-                
-               
-                h[0]=Math.max(h[0],a*a);
-            }
-            else{
-                h[i+1]=0;
-                w[i+1]=0;
             }
         }
-        dp(matrix,h,w,index+1);
+
+        return maxSide * maxSide;
     }
     public static void main(String[] args) {
         MaximalSquare solution = new MaximalSquare();
