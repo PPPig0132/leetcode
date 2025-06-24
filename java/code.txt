@@ -1,22 +1,31 @@
-import ListNode.ListNode;
-/*给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。*/
-
-public class RemoveElements {
-    public ListNode removeElements(ListNode head, int val) {
-        if(head==null) return head;
-        ListNode new_head =new ListNode();
-        new_head.next=head;
-        ListNode pre=new_head,end=head;
-        while(end!=null){
-            if(end.val==val){
-                pre.next=end.next;
-                end=end.next;
+package String;
+/*字符串相乘，结果也用字符串表示*/
+public class Multiply {
+    public String multiply(String num1, String num2) {
+        int m=num1.length(),n=num2.length(),l=m+n;
+        char res1[]= new char[l];
+        int cur=0,c,temp;
+        for(int i=m-1;i>=0;--i){
+            int m1=num1.charAt(i)-'0';
+            c=0;
+            for(int j=n-1;j>=0;--j){
+                temp=res[l-(n-j)-cur] + num2.charAt(j)*m1+c;//当前的值+乘积的值+进位符
+                res[l-(n-j)-cur]= temp%10;
+                c=temp/10;
             }
-            if(end==null) return new_head.next;
-            end=end.next;
-            pre=pre.next;
+            if(c>0){
+                res[l-n-cur]=cur;
+            }
         }
-        return new_head.next;
-        
+        StringBuilder sb=new StringBuilder();
+        int index=0;
+        while(res[index]==0){
+                index++;
+            }
+        for(int i=index;i<l;++i){
+            res[i]+='0';
+            sb.append(res[i]);
+        }
+        return sb.toString();
     }
 }

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.*;
 import ListNode.Node;
 
@@ -5,21 +6,19 @@ public class Test {
         
     public static void main(String[] args) {
        
-        // String []c1=c.split("/");
-        // for(int i=0;i<c1.length;++i){
-        //     System.out.print(c1[i]+" ");
-        // }
+       char []num=new char[3];
+       num[0]=0;
+       num[1]=1;
+       num[2]=2;
+       StringBuilder sb = new StringBuilder();
+       for (int i = 0; i < num.length; i++) {
+           num[i]+='0'; // 将数字转换为字符
+           sb.append(num[i]);
+       }
+       String s1=new String("0");
+       System.out.println(s1+"    "+sb.toString());
 
-       int x=15;
-       Long res=289398L*289398L;
-       for(int i=1;i<=x;++i){
-          
-                res*=i;
-            }
-          
         
-        System.out.println(289398*289398);
-        System.out.println(res);
     }
-        
+         
 }
