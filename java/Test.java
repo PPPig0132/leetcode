@@ -2,23 +2,36 @@ import java.math.BigDecimal;
 import java.util.*;
 import ListNode.Node;
 
+
+class Animal {
+    void makeSound() {
+        System.out.println("这个动物在发出声音。");
+    }
+}
+ 
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("这个狗在汪汪叫。");
+    }
+    void makeMove() {
+        System.out.println("这个狗在欢快地奔跑。");
+    }
+}
+
 public class Test {
         
     public static void main(String[] args) {
        
-       char []num=new char[3];
-       num[0]=0;
-       num[1]=1;
-       num[2]=2;
+       int nums[]=new int[]{1,2,2};
        StringBuilder sb = new StringBuilder();
-       for (int i = 0; i < num.length; i++) {
-           num[i]+='0'; // 将数字转换为字符
-           sb.append(num[i]);
+       for(int i=0;i<nums.length;i++){
+           sb.append(nums[i]);
        }
-       String s1=new String("0");
-       System.out.println(s1+"    "+sb.toString());
-
-        
+       System.out.println(sb.toString());
+       while(!sb.isEmpty()){
+           sb.deleteCharAt(sb.length()-1);
+       }
+       System.out.println(sb.toString());
     }
          
 }
