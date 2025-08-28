@@ -1,33 +1,32 @@
-package dp;
+package Tree;
+// letcode  257
+//给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。
+//叶子节点 是指没有子节点的节点。
 
-import java.util.ArrayList;
-import java.util.List;
 
-import Tree.TreeNode;
+import java.util.*;
 
-public class NumTrees {
-     public int numTrees(int n) {
-        if (n == 0)  return 0;
-        int nums[]=new int[n+1];
-        nums[0]=1;
-        nums[1]=1;
-        return nums[n];
+public class BinaryTerrPaths {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res=new ArrayList<>();
+        backtrack(root,res,new StringBuilder());
+        return res;
+        
     }
-    public void dp(int nums[],int n){
-        for(int i=2;i<=n;++i){
-            int res=0;
-            for(int j=1;i<=(i+1)/2;++j){
-                int l=j-1;
-                int r=i-j;
-                res+=nums[l]*nums[r];
-            }
-            nums[i]=res;
+
+    public backtrack(TreeNode root, List<String> ans, StringBuilder cur){
+        cur.append(root.val);
+        if(root.left==null && root.right==null){
+            res.add(sb.toString());
+            return;
         }
-    }
-    public static void main(String[] args) {
-        NumTrees numTrees = new NumTrees();
-        int result = numTrees.numTrees(5);
-        // 输出结果
-        System.out.println(result); // 输出：5
+        cur.append("->");
+        if(root.left!=null){
+            backtrack(root.left,ans,cur);
+        }
+        if(root.right!=null){
+            backtrack(root.right,ans,cur);
+        }
+        cur.remove(cur.size-3);
     }
 }

@@ -16,8 +16,6 @@ public class Perrmute {
 
         backtrack(0,nums.length,nums,ans);
         return ans;
-
-        
     }
 
     public void backtrack(int start,int end,int[] nums,List<List<Integer>>ans ){
@@ -30,16 +28,15 @@ public class Perrmute {
             return;
         }
         for(int i =start;i<end;++i){
-            int temp=nums[i];
-            nums[i]=nums[start];
-            nums[start]=temp;
-
+            swap(nums, i, start);
             backtrack(start+1,end,nums,ans);
-
-            temp=nums[i];
-            nums[i]=nums[start];
-            nums[start]=temp;
+            swap(nums, i, start);
         }
+    }
+    public void swap(int num[],int i,int j){
+        int temp=num[i];
+        num[i]=num[j];
+        num[j]=temp;
     }
     
 }

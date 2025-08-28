@@ -23,7 +23,7 @@ public class MinStack {
     
     public void push(int val) {
         stack.push(val);
-        if(minStack.isEmpty() || val <= minStack.peek()){
+        if(minStack.isEmpty() || val <= minStack.peek()){//当前元素小于最小元素时才入栈，因为栈的出栈顺序是固定的，不可能存在主栈与最小栈出栈顺序不一致的情况
             minStack.push(val);
         }
         
